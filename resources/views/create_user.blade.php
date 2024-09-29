@@ -65,16 +65,33 @@
         <form action="{{ route('user.store') }}" method="POST">
             @csrf
             <label for="nama">Nama:</label>
-            <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda">
+            <input type="text" id="nama" name="nama" placeholder="Masukkan Nama">
+            @foreach($errors->get('nama') as $msg)
+            <p class="text-danger">{{ $msg }}</p>
+            @endforeach
 
             <label for="npm">NPM:</label>
-            <input type="text" id="npm" name="npm" placeholder="Masukkan NPM Anda">
+            <input type="text" id="npm" name="npm" placeholder="Masukkan NPM">
+            @foreach($errors->get('npm') as $msg)
+            <p class="text-danger">{{ $msg }}</p>
+            @endforeach
 
-            <label for="kelas">Kelas:</label>
-            <input type="text" id="kelas" name="kelas" placeholder="Masukkan Kelas Anda">
+            <label for="kelas_id">Kelas:</label>
+            <select name="kelas_id" id="kelas_id">
+                @foreach ($kelas as $kelasItem)
+                <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama_kelas }}</option>
+                @endforeach
+            </select>
+
+   
+
 
             <input type="submit" value="Submit">
         </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
