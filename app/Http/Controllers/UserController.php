@@ -9,10 +9,32 @@ use App\Http\Requests\UserControllerRequest;
 
 class UserController extends Controller
 {
+    public $userModel;
+    public $kelasModel;
+
+    public function __construct()
+    {
+     $this->userModel = new UserModel();
+     $this->kelasModel = new Kelas();
+    
+    }
+    public function index()
+    {
+    $data = [
+    'title' => 'Create User',
+    'kelas' => $this->userModel->getUser(),
+    ];
+    return view('list_user', $data);
+    }
+
     public function create(){
-        return view('create_user', [
-        'kelas' => Kelas::all(),
-    ]);
+        $kelasModel = new Kelas();
+        $kelas = $this->kelasModel->getKelas();
+        $data = [
+        'title'=> 'create user',
+        'kelas' => $kelas,
+        ];
+        return view('create_user', $data);
     }
 
     public function store(Request $request){
@@ -26,10 +48,6 @@ class UserController extends Controller
 
         $user->load('kelas');
 
-        return view('profile', [
-            'nama' => $user->nama,
-            'npm' => $user->npm,
-            'nama_kelas' => $user->kelas->nama_kelas ?? 'Kelas tidak ditemukan',
-        ]);
+        return redirect()->to('/user');
     }
 }
