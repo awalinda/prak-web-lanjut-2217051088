@@ -6,9 +6,15 @@
     <title>Profil Mahasiswa</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    @extends('layouts.app')
+    @section('content')
     <style>
         body {
-            background-image: url('https://i.pinimg.com/736x/eb/7e/20/eb7e200a0ce488fb6f0f6ba3b93eeb8a.jpg'); /* Ganti dengan URL gambar latar belakang lucu */
+            height: 100vh; /* Memastikan body memenuhi tinggi layar */
+            display: flex; /* Menggunakan flexbox */
+            justify-content: center; /* Memusatkan horizontal */
+            align-items: center; /* Memusatkan vertical */
+            background-image: url('https://i.pinimg.com/736x/eb/7e/20/eb7e200a0ce488fb6f0f6ba3b93eeb8a.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -20,6 +26,7 @@
             border-radius: 20px;
             padding: 25px;
             transition: transform 0.3s;
+            width: 500px
         }
         .card:hover {
             transform: scale(1.05); 
@@ -41,12 +48,15 @@
         .profile-img {
             width: 200px;
             height: 200px;
-            border-radius: 50%;
+            border-radius: 10%;
             object-fit: cover;
             margin-bottom: 15px;
             border: 5px solid #ff69b4; 
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
             transition: transform 0.3s;
+            display: flex;
+            justify-content: center;   
+            align-items: center;
         }
         .profile-img:hover {
             transform: rotate(10deg); 
@@ -77,42 +87,52 @@
         td {
             background-color: #fff;
         }
+        .info {
+    background-color: rgba(255, 255, 255, 0.8); /* Latar belakang dengan transparansi */
+    border-radius: 15px; /* Sudut membulat */
+    padding: 15px; /* Ruang dalam */
+    margin: 10px 0; /* Margin atas dan bawah */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bayangan */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transisi halus */
+}
+
+.info:hover {
+    transform: scale(1.02); /* Efek pembesaran saat hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Bayangan lebih dalam saat hover */
+}
+
+.label {
+    font-weight: bold; /* Teks label tebal */
+    color: #ff69b4; /* Warna teks label */
+    margin-bottom: 5px; /* Jarak bawah */
+}
+
+.value {
+    color: #333; /* Warna teks nilai */
+}
+
     </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h2 class="header">✨ Profil Mahasiswa✨</h2>
-                        
-                        <!-- Foto Profil -->
-                        <img src="https://i.pinimg.com/564x/5b/f8/ba/5bf8bad784c493c8c109216e1afd8d8c.jpg" alt="Foto Profil" class="profile-img"> <!-- Ganti dengan URL gambar profil lucu -->
-                        
-                        <!-- Tabel Profil -->
-                        <table>
-                            <tr>
-                                <th>Nama</th>
-                                <td class="lowercase">Awalinda Pangestuti</td>
-                            </tr>
-                            <tr>
-                                <th>Kelas</th>
-                                <td>D</td>
-                            </tr>
-                            <tr>
-                                <th>NPM</th>
-                                <td>2217051088</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="footer">
-                        <p>&copy; halo ayinn🌟</p>
-                    </div>
-                </div>
-            </div>
+<div class="card">
+        <img src="../{{ $user->foto }}" alt="Avatar" class="profile-img"><!-- Avatar Deadpool -->
+        
+        <h1>Profil User</h1>
+
+        <div class="info">
+            <p class="label">Nama :{{$user->nama}}</p>
+            
+        </div>
+        <div class="info">
+            <p class="label">NPM :{{$user->npm}}</p>
+           
+        </div>
+        <div class="info">
+            <p class="label">Kelas : {{$user->nama_kelas ?? 'Kelas Tidak Ditemukan'}}</p>
+            
         </div>
     </div>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
