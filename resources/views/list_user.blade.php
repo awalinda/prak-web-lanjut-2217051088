@@ -33,11 +33,7 @@
     <h2>Daftar Mahasiswa</h2>
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+
         <br></br>
         <br></br>
         <a href="{{ route('user.create') }}" class="btn btn-primary mb-3">Tambah Pengguna Baru</a>
@@ -56,7 +52,17 @@
                 <td>{{ $user->nama }}</td>
                 <td>{{ $user->npm }}</td>
                 <td>{{ $user->nama_kelas}}</td>
-                <td><a href="{{ route('users.show', $user->id) }}" class = "btn btn-warning mb-3">Detail</a></td>
+               
+                <td>
+                    <div class="action-buttons">
+                        <a href="{{ route('user.show', $user->id) }}" class="btn btn-warning btn-sm">View</a>
+                        <a href="{{ route('user.edit', $user['id']) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('user.destroy', $user['id']) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">delete</button>
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>
